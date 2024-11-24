@@ -2,20 +2,9 @@ import java.util.Scanner;
 
 public class Aufgabe_1 {
     public static void main(String[] args) {
-        // Array mit bekannten Portnummern
-        int[] portNumbers = {21, 23, 25, 80, 143};
-        // Array mit den Beschreibungen zu den bekannten Ports
-        String[] portDescriptions = {
-                "FTP (File Transfer Protocol, Übertragung von Dateien)",
-                "Telnet (Einloggen in entfernte Rechner)",
-                "SMTP (Simple Mail Transfer Protocol, Mailversand)",
-                "HTTP (HyperText Transfer Protocol, Zugriff auf Web-Server)",
-                "IMAP (Internet Message Access Protocol, Zugriff auf Mail-Server)"
-        };
-
         // Scanner zum Einlesen von Benutzereingaben
         Scanner input = new Scanner(System.in);
-        boolean Beenden = false; // Steuert die Hauptschleife
+        boolean beenden = false; // Steuert die Hauptschleife
 
         do {
             int portnummer;
@@ -32,38 +21,38 @@ public class Aufgabe_1 {
                 }
             }
 
-            // Überprüfung, in welchem Bereich sich die Portnummer befindet
-            if (portnummer >= 0 && portnummer <= 1023) {
-                boolean found = false; // Flag, um zu überprüfen, ob der Port bekannt ist
-                for (int i = 0; i < portNumbers.length; i++) {
-                    if (portNumbers[i] == portnummer) {
-                        // Ausgabe der Beschreibung, wenn der Port bekannt ist
-                        System.out.println("Das ist ein well-known Port bzw. " + "Port " + portnummer + ": " + portDescriptions[i]);
-                        found = true; // Port wurde gefunden
-                        break;
-                    }
+            // Überprüfung der Portkategorie
+            if (portnummer <= 1023) {
+                // Well-known Ports
+                switch (portnummer) {
+                    case 21 : System.out.println("Port 21: FTP (File Transfer Protocol, Übertragung von Dateien)");
+                    break;
+                    case 23 : System.out.println("Port 23: Telnet (Einloggen in entfernte Rechner)");
+                    break;
+                    case 25 : System.out.println("Port 25: SMTP (Simple Mail Transfer Protocol, Mailversand)");
+                    break;
+                    case 80 : System.out.println("Port 80: HTTP (HyperText Transfer Protocol, Zugriff auf Web-Server)");
+                    break;
+                    case 143 : System.out.println("Port 143: IMAP (Internet Message Access Protocol, Zugriff auf Mail-Server)");
+                    break;
+                    default : System.out.println("Sonstiger Dienst im Well-known-Bereich.");
                 }
-                if (!found) {
-                    // Nachricht, wenn der Port nicht in der Liste ist
-                    System.out.println("Sonstiger Dienst.");
-                }
-
-            } else if (portnummer >= 1024 && portnummer <= 49151) {
-                // Nachricht für registered Ports
+            } else if (portnummer <= 49151) {
+                // Registered Ports
                 System.out.println("Der Port ist ein 'registered Port'.");
             } else {
-                // Nachricht für dynamische Ports
+                // Dynamische Ports
                 System.out.println("Der Port ist ein 'dynamic Port'.");
             }
 
             // Benutzer fragen, ob er fortfahren möchte
             System.out.println("Möchten Sie fortfahren? (1 für Ja/2 für Nein)");
-            int antwort = input.nextInt(); // Antwort vom Benutzer einlesen
+            int antwort = input.nextInt();
             if (antwort == 2) {
-                Beenden = true; // Hauptschleife beenden, wenn Benutzer Nein wählt
+                beenden = true; // Hauptschleife beenden, wenn Benutzer Nein wählt
             }
 
-        } while (!Beenden); // Schleife läuft, solange der Benutzer fortfahren möchte
+        } while (!beenden); // Schleife läuft, solange der Benutzer fortfahren möchte
 
         // Programmende
         System.out.println("Programm beendet.");
