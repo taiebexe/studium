@@ -13,7 +13,7 @@ public class aufgabe3 {
                 System.out.print(i + " ");
             }
         }
-        System.out.println(); // Add a line break after output
+
     }
 
     // kettende-loop variant
@@ -28,6 +28,6 @@ public class aufgabe3 {
                 }
             }
         }
-        System.out.println(); // Add a line break after output
+
     }
 }
